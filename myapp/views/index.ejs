@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/socket.io/socket.io.js">
+    </script>
+    <script>
+	var socket = io("http://172.16.0.9:3000");
+	socket.on('socketToMe', function(data) {
+		var names = "";
+		var test = document.getElementById("test");
+		for(var i = 0; i < data.length; i++) {
+			names += data[i] + "<br/>";
+		}	
+		test.innerHTML = test.innerHTML + names;
+	});
+    </script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div id="test"></div>
+    <p>Welcome to <%= title %></p>
+  </body>
+</html>
