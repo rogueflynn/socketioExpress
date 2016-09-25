@@ -13,6 +13,7 @@ and returing the io object as a response object.
 
 
 References:
+
 http://stackoverflow.com/questions/24609991/using-socket-io-in-express-4-and-express-generators-bin-www
 
 http://chariotsolutions.com/blog/post/getting-chatty-angular-socket-io-nodeexpress-bootstrap/
