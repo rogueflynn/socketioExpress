@@ -8,15 +8,15 @@ router.get('/', function(req, res, next) {
 	var GameScore = Parse.Object.extend('GameScore');
 	var query = new Parse.Query(GameScore);
 	query.find({
-	success: function(results) {
-		for(var i = 0; i < results.length; i++) {
-			arr.push(results[i].get('playerName'));
+		success: function(results) {
+			for(var i = 0; i < results.length; i++) {
+				arr.push(results[i].get('playerName'));
+			}
+			res.io.emit("socketToMe", arr);
+		}, 
+		error: function(error) {
+			//res.redirect('/users');
 		}
-		res.io.emit("socketToMe", arr);
-	}, 
-	error: function(error) {
-		res.redirect('/users');
-	}
 	});
   	res.send('respond with a resource');
 });

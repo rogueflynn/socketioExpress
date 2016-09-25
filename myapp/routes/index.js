@@ -22,19 +22,23 @@ router.get('/', function(req, res, next) {
 			res.redirect('/users');
 		}
   });*/ 
-  var GameScore = Parse.Object.extend('GameScore');
-  var query = new Parse.Query(GameScore);
-  query.find({
-	success: function(results) {
-		res.render("index", {
-					title: "Express",
-					Results: results
-		}); 
-        }, 
-        error: function(error) {
-		res.redirect('/users');
-        }
-  });
+ // var GameScore = Parse.Object.extend('GameScore');
+ // var query = new Parse.Query(GameScore);
+ // query.find({
+ //       success: function(results) {
+ //       	res.render("index", {
+ //       				title: "Express",
+ //       				Results: results
+ //       	}); 
+ //       }, 
+ //       error: function(error) {
+ //       	res.redirect('/users');
+ //       }
+ // });
+	res.render("index", {
+				title: "Express",
+				Results:"Nothing" 
+	}); 
 /*
   query.find({userMasterKey: true}).then(function(results) {
 		res.render("index", {

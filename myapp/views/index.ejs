@@ -6,7 +6,7 @@
     <script src="/socket.io/socket.io.js">
     </script>
     <script>
-	var socket = io("http://172.16.0.9:3000");
+	var socket = io("http://172.16.0.9");
 	socket.on('socketToMe', function(data) {
 		var names = "";
 		var test = document.getElementById("test");
@@ -15,6 +15,11 @@
 		}	
 		test.innerHTML = test.innerHTML + names; 
 	});
+
+	socket.on('connectMessage', function(msg) {
+		test.innerHTML = test.innerHTML + msg + "<br/>";
+	});
+	socket.emit('message', 'Victor is cool');
     </script>
   </head>
   <body>

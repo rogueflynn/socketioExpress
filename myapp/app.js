@@ -12,7 +12,7 @@ if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
 }
 
-
+//Parse stuff
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
@@ -21,9 +21,11 @@ var api = new ParseServer({
   serverURL: process.env.SERVER_URL || 'http://localhost:3000/parse',  // Don't forget to change to https if needed
 });
 
+//Socket.IO stuff
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+require('./sockets/base')(io);
 
 // Serve the Parse API on the /parse URL prefix
 var mountPath = process.env.PARSE_MOUNT || '/parse';
@@ -32,14 +34,13 @@ app.use(mountPath, api);
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//Used to send real time responses via socket.io
 app.use(function(req, res, next) {
 	res.io = io;
-	req.io = io;
 	next();
 });
 
